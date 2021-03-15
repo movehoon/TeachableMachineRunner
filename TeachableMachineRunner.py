@@ -12,7 +12,7 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
-        self.tm = tm_model.TM_Model('keras_model.h5')
+        # self.tm = tm_model.TM_Model('keras_model.h5')
 
     def initUI(self):
         grid = QGridLayout()
@@ -63,6 +63,7 @@ class MyApp(QWidget):
             result = self.predict(image)
             self.textResult.setText(str(result))
             # print('result: ', result)
+        return 0
 
     def predict(self, image):
         return self.tm.predict(image)
@@ -70,6 +71,7 @@ class MyApp(QWidget):
     def startServer(self):
         global flask_app
         flask_app.run()
+        return 0
 
 
 

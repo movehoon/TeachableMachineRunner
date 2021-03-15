@@ -24,7 +24,7 @@ class TM_Model:
         self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
 
-    def predict(self, image):
+    def predict(self, image, threshold=0.8):
         # Replace this with the path to your image
         # image = Image.open('dog.jpg')
 
@@ -47,8 +47,9 @@ class TM_Model:
 
         # run the inference
         prediction = self.model.predict(self.data)
-        print(prediction[0])
-        # print('max value: ', max(prediction[0]))
-        # print('max index: ', prediction[0].index(max(prediction[0])))
-        return np.argmax(prediction)
-        # return prediction[0].index(max(predictionp[0]))
+        print(prediction)
+        max_value = np.max(prediction)
+        print('max: ', max_value)
+        if max_value > threshold:
+            return np.argmax(prediction)
+        return -1
