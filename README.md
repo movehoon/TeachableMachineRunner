@@ -5,6 +5,7 @@ Run keras model of teachable machine
 1. Install [Anaconda](https://www.anaconda.com/)
 
 2. Run Anaconda Prompt
+
 ![Anaconda Prompt](docs/anaconda.png)
 
 3. Create virtual environment
