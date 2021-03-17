@@ -24,11 +24,13 @@ conda activate tms
 ```
 pip install PyQt5 Pillow tensorflow==2.4.1 flask 
 ```
+![Anaconda](docs/anaconda_pip.png)
 
 6. Move to project directory and Execute
 ```
 python TeachableMachineRunner.py
 ```
+![Anaconda](docs/anaconda_execute.png)
 
 6. Open Model
 
