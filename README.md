@@ -28,7 +28,7 @@ pip install PyQt5 Pillow tensorflow==2.4.1 flask
 
 6. Move to project directory and Execute
 ```
-python TeachableMachineRunner.py
+python TeachableMachineServer.py
 ```
 ![Anaconda](docs/anaconda_execute.png)
 
