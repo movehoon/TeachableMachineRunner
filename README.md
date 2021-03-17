@@ -5,24 +5,27 @@ Run keras model of teachable machine
 1. Install [Anaconda](https://www.anaconda.com/)
 
 2. Run Anaconda Prompt
-(docs/anaconda.png)
+
+![Anaconda Prompt](docs/anaconda.png)
 
 3. Create virtual environment
 ```
 conda create -n tms python=3.7.10
 ```
+![Anaconda](docs/anaconda_create_virtual.png)
 
 4. Switch to virtual environment
 ```
 conda activate tms
 ```
+![Anaconda](docs/anaconda_activate.png)
 
 5. Install modules
 ```
 pip install PyQt5 Pillow tensorflow==2.4.1 flask 
 ```
 
-6. Execute
+6. Move to project directory and Execute
 ```
 python TeachableMachineRunner.py
 ```
