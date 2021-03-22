@@ -1,5 +1,5 @@
 # TeachableMachineServer
-Run keras model of teachable machine
+Run keras model of [teachable machine](https://teachablemachine.withgoogle.com/)
 
 ## Make Environments
 1. Install [Anaconda](https://www.anaconda.com/)
@@ -37,3 +37,7 @@ python TeachableMachineServer.py
 7. Image Open for test
 
 8. Start Server
+
+9. Check running on browser
+http://localhost:5000
+
