@@ -24,7 +24,7 @@ class TM_Model:
         self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
 
-    def predict(self, image, threshold=0.8):
+    def predict(self, image, threshold=0.9):
         # Replace this with the path to your image
         # image = Image.open('dog.jpg')
 

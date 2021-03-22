@@ -1,6 +1,7 @@
 import sys
-from PyQt5.QtWidgets import (QApplication, QWidget, QGridLayout, QLabel, QLineEdit, QTextEdit, QPushButton, QFileDialog)
+from PyQt5.QtWidgets import (QApplication, QWidget, QGridLayout, QLabel, QLineEdit, QTextEdit, QPushButton, QFileDialog, QSlider)
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
 from PIL import Image, ImageOps
 import tm_model
 from flask import Flask, request, Response
@@ -11,6 +12,7 @@ class MyApp(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.threshold = 0.9
         self.initUI()
         # self.tm = tm_model.TM_Model('keras_model.h5')
 
@@ -26,26 +28,38 @@ class MyApp(QWidget):
         btnImageOpen.clicked.connect(self.imageOpen)
         # Line3. Image Show
         self.imageLabel = QLabel()
-        # Line4. Show Result
+        # Line4. Threshold
+        self.labelThreshold = QLabel('Threshold('+str(int(self.threshold*100))+')')
+        self.sliderThreshold = QSlider(Qt.Horizontal, self)
+        self.sliderThreshold.setRange(0, 100)
+        self.sliderThreshold.setSingleStep(1)
+        self.sliderThreshold.setValue(self.threshold*100)
+        self.sliderThreshold.setTickPosition(QSlider.NoTicks)
+        self.sliderThreshold.valueChanged.connect(self.changeThreshold)
+        # Line5. Show Result
         self.textResult = QTextEdit()
-        # Line2. Server Start
+        # Line6. Server Start
         btnStartServer = QPushButton('Server Start', self)
         btnStartServer.clicked.connect(self.startServer)
 
+        # Column 1
         grid.addWidget(QLabel('Load Model:'), 0, 0)
         grid.addWidget(QLabel('Open Image:'), 1, 0)
         grid.addWidget(QLabel('Review:'), 2, 0)
-        grid.addWidget(QLabel('Result:'), 3, 0)
-        grid.addWidget(QLabel('Server Run:'), 4, 0)
+        grid.addWidget(self.labelThreshold, 3, 0)
+        grid.addWidget(QLabel('Result:'), 4, 0)
+        grid.addWidget(QLabel('Server Run:'), 5, 0)
 
+        # Column 2
         grid.addWidget(btnModelOpen, 0, 1)
         grid.addWidget(btnImageOpen, 1, 1)
         grid.addWidget(self.imageLabel, 2, 1)
-        grid.addWidget(self.textResult, 3, 1)
-        grid.addWidget(btnStartServer, 4, 1)
+        grid.addWidget(self.sliderThreshold, 3, 1)
+        grid.addWidget(self.textResult, 4, 1)
+        grid.addWidget(btnStartServer, 5, 1)
 
         self.setWindowTitle('QGridLayout')
-        self.setGeometry(300, 300, 300, 200)
+        self.setGeometry(300, 300, 300, 300)
         self.show()
 
     def modelOpen(self):
@@ -65,8 +79,14 @@ class MyApp(QWidget):
             # print('result: ', result)
         return 0
 
+    def changeThreshold(self):
+        self.threshold = float(self.sliderThreshold.value())/100
+        self.labelThreshold.setText('Threshold('+str(int(self.threshold*100))+')')
+        # print(self.threshold)
+        return 0
+
     def predict(self, image):
-        return self.tm.predict(image)
+        return self.tm.predict(image, self.threshold)
 
     def startServer(self):
         global flask_app
