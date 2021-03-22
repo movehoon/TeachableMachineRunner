@@ -73,7 +73,7 @@ class MyApp(QWidget):
         print(image_path)
         if len(image_path[0]):
             self.imageLabel.setPixmap(QPixmap(image_path[0]))
-            image = Image.open(image_path[0])
+            image = Image.open(image_path[0]).convert('RGB')
             result = self.predict(image)
             self.textResult.setText(str(result))
             # print('result: ', result)
