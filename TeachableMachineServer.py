@@ -97,9 +97,9 @@ class MyApp(QWidget):
 
 @flask_app.route("/")
 def index():
-    return "hi"
+    return "This is TeachableMachine Server."
 
-@flask_app.route('/tm', methods=['POST'])
+@flask_app.route('/tms', methods=['POST'])
 def teachablemachine():
     if request.method == 'POST':
         f = request.files['image']
